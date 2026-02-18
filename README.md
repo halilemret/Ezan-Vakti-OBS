@@ -99,15 +99,13 @@ docker run -d -p 3222:80 ezan-vakti
 ```
 ├── index.html                    # Widget (HTML + CSS + JS)
 ├── ramazan_imsakiye_2026.json    # 81 il ezan vakitleri verisi
-├── veri.py                       # Veri çekme scripti (Aladhan API)
 ├── Dockerfile                    # Docker deployment
 └── README.md
 ```
 
 ## 📊 Veri Kaynağı
 
-Ezan vakitleri [Aladhan API](https://aladhan.com/prayer-times-api) üzerinden Diyanet İşleri Başkanlığı hesaplama yöntemi (method: 13) ile çekilmiştir. Veriler `veri.py` scripti ile güncellenebilir.
-
+Ezan vakitleri [Aladhan API](https://aladhan.com/prayer-times-api) üzerinden Diyanet İşleri Başkanlığı hesaplama yöntemi (method: 13) ile çekilmiştir.
 ## 📄 Lisans
 
 MIT License — Dilediğiniz gibi kullanabilir, değiştirebilir ve paylaşabilirsiniz.
