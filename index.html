@@ -3,59 +3,58 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>İmsak Vakitleri - Ramazan</title>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Outfit:wght@300;400;600;700;800&display=swap"
-        rel="stylesheet">
+    <title>Ezan Vakitleri — Canlı</title>
     <style>
-        *,
-        *::before,
-        *::after {
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap');
+
+        * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
         :root {
+            --bg-dark: rgba(10, 28, 18, 0.92);
+            --card-bg: rgba(20, 50, 35, 0.85);
+            --card-active: rgba(212, 168, 67, 0.25);
             --gold: #d4a843;
-            --gold-light: #f0d68a;
-            --gold-glow: rgba(212, 168, 67, 0.45);
-            --green-deep: #071a12;
-            --green-dark: #0d2e20;
-            --green-mid: #145a44;
-            --text-primary: #f5f0e8;
-            --text-secondary: #c4b99a;
-            --card-bg: rgba(8, 30, 20, 0.85);
-            --card-border: rgba(212, 168, 67, 0.25);
-            --panel-bg: rgba(5, 18, 12, 0.88);
+            --gold-light: #f0d78c;
+            --green-light: #7ec8a0;
+            --text: #e8e0d0;
+            --text-dim: rgba(232, 224, 208, 0.5);
         }
 
         body {
+            font-family: 'Inter', sans-serif;
             background: transparent;
-            font-family: 'Outfit', sans-serif;
-            color: var(--text-primary);
+            color: var(--text);
             overflow: hidden;
         }
 
-        /* ── Main widget panel ── */
         .widget {
-            width: 520px;
-            background: var(--panel-bg);
-            border: 1px solid var(--card-border);
+            width: 540px;
+            padding: 20px 18px 12px;
+            background: var(--bg-dark);
             border-radius: 18px;
-            padding: 22px 24px 18px;
+            border: 1px solid rgba(212, 168, 67, 0.2);
             position: relative;
             overflow: hidden;
-            box-shadow:
-                0 0 40px rgba(0, 0, 0, 0.6),
-                0 0 80px rgba(5, 18, 12, 0.4),
-                inset 0 1px 0 rgba(212, 168, 67, 0.1);
         }
 
-        /* ── Subtle geometric pattern inside widget ── */
+        /* ── Decorative BG ── */
         .widget::before {
             content: '';
+            position: absolute;
+            top: -60px;
+            right: -60px;
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, rgba(212, 168, 67, 0.08) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .geo-pattern {
             position: absolute;
             inset: 0;
             opacity: 0.03;
@@ -63,83 +62,55 @@
                 linear-gradient(30deg, var(--gold) 12%, transparent 12.5%, transparent 87%, var(--gold) 87.5%),
                 linear-gradient(150deg, var(--gold) 12%, transparent 12.5%, transparent 87%, var(--gold) 87.5%),
                 linear-gradient(30deg, var(--gold) 12%, transparent 12.5%, transparent 87%, var(--gold) 87.5%),
-                linear-gradient(150deg, var(--gold) 12%, transparent 12.5%, transparent 87%, var(--gold) 87.5%),
-                linear-gradient(60deg, rgba(212, 168, 67, 0.5) 25%, transparent 25.5%, transparent 75%, rgba(212, 168, 67, 0.5) 75%),
-                linear-gradient(60deg, rgba(212, 168, 67, 0.5) 25%, transparent 25.5%, transparent 75%, rgba(212, 168, 67, 0.5) 75%);
-            background-size: 60px 105px;
-            background-position: 0 0, 0 0, 30px 52px, 30px 52px, 0 0, 30px 52px;
+                linear-gradient(150deg, var(--gold) 12%, transparent 12.5%, transparent 87%, var(--gold) 87.5%);
+            background-size: 40px 70px;
+            background-position: 0 0, 0 0, 20px 35px, 20px 35px;
             pointer-events: none;
-            z-index: 0;
-        }
-
-        /* Inner glow */
-        .widget::after {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: radial-gradient(ellipse at top center, rgba(212, 168, 67, 0.06) 0%, transparent 60%);
-            pointer-events: none;
-            z-index: 0;
         }
 
         /* ── Header ── */
         .header {
             text-align: center;
+            margin-bottom: 12px;
             position: relative;
             z-index: 1;
-            margin-bottom: 10px;
         }
 
-        .header-ornament {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            margin-bottom: 6px;
-        }
-
-        .ornament-line {
-            width: 80px;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, var(--gold), transparent);
-        }
-
-        .ornament-icon {
-            font-size: 14px;
+        .crescent {
+            font-size: 18px;
             color: var(--gold);
-            text-shadow: 0 0 8px var(--gold-glow);
+            margin-bottom: 2px;
         }
 
-        .title {
-            font-family: 'Amiri', serif;
-            font-size: 24px;
-            font-weight: 700;
+        .vakit-label {
+            font-size: 22px;
+            font-weight: 800;
             color: var(--gold);
-            text-shadow: 0 0 20px var(--gold-glow);
-            letter-spacing: 4px;
-        }
-
-        /* ── Clock ── */
-        .clock-row {
-            text-align: center;
-            margin-bottom: 14px;
-            position: relative;
-            z-index: 1;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 4px;
         }
 
         .clock {
-            font-family: 'Outfit', sans-serif;
-            font-size: 40px;
-            font-weight: 800;
-            color: var(--text-primary);
-            letter-spacing: 2px;
-            line-height: 1;
-            text-shadow: 0 0 20px rgba(245, 240, 232, 0.15);
+            display: flex;
+            justify-content: center;
+            align-items: baseline;
+            gap: 3px;
+            margin-bottom: 2px;
         }
 
-        .clock .sep {
+        .clock-digit {
+            font-size: 42px;
+            font-weight: 800;
+            color: var(--text);
+            font-variant-numeric: tabular-nums;
+        }
+
+        .clock-sep {
+            font-size: 36px;
+            font-weight: 300;
             color: var(--gold);
-            animation: blink 1s step-end infinite;
+            animation: blink 1s ease-in-out infinite;
         }
 
         @keyframes blink {
@@ -150,33 +121,40 @@
             }
 
             50% {
-                opacity: 0.25;
+                opacity: 0.2;
             }
         }
 
         .date-text {
             font-size: 11px;
-            color: var(--text-secondary);
-            letter-spacing: 1.5px;
-            margin-top: 2px;
+            color: var(--text-dim);
+            letter-spacing: 1px;
         }
 
-        /* ── Divider ── */
-        .divider {
-            width: 100%;
-            height: 1px;
-            background: linear-gradient(90deg, transparent 5%, var(--gold) 50%, transparent 95%);
-            opacity: 0.25;
-            margin-bottom: 14px;
+        /* ── Countdown bar ── */
+        .countdown-bar {
+            text-align: center;
+            padding: 6px 0;
+            margin-bottom: 8px;
             position: relative;
             z-index: 1;
         }
 
+        .countdown-bar .label {
+            font-size: 11px;
+            color: var(--text-dim);
+            margin-bottom: 2px;
+        }
+
+        .countdown-bar .time {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--gold-light);
+            font-variant-numeric: tabular-nums;
+        }
+
         /* ── City list ── */
         .city-list {
-            display: flex;
-            flex-direction: column;
-            gap: 6px;
             position: relative;
             z-index: 1;
         }
@@ -204,11 +182,6 @@
             pointer-events: auto;
         }
 
-        .page-content.exit-left {
-            opacity: 0;
-            transform: translateX(-30px);
-        }
-
         /* ── City row ── */
         .city-row {
             display: flex;
@@ -218,7 +191,7 @@
             border: 1px solid rgba(212, 168, 67, 0.12);
             border-radius: 10px;
             padding: 6px 14px;
-            transition: all 0.3s ease;
+            transition: all 0.4s ease;
             animation: rowAppear 0.35s ease forwards;
             opacity: 0;
         }
@@ -271,519 +244,500 @@
             }
         }
 
-        .plate {
-            width: 38px;
-            height: 30px;
-            background: linear-gradient(135deg, var(--gold) 0%, #b8912e 100%);
+        /* Ezan okunan şehir — yanıp sönen altın */
+        .city-row.called {
+            background: var(--card-active);
+            border-color: var(--gold);
+            animation: ezanFlash 0.6s ease-in-out 5;
+        }
+
+        @keyframes ezanFlash {
+
+            0%,
+            100% {
+                background: var(--card-active);
+                box-shadow: 0 0 8px rgba(212, 168, 67, 0.3);
+            }
+
+            50% {
+                background: rgba(212, 168, 67, 0.45);
+                box-shadow: 0 0 18px rgba(212, 168, 67, 0.6);
+            }
+        }
+
+        /* Kaybolma animasyonu */
+        .city-row.fade-out {
+            opacity: 0;
+            transform: translateX(-40px) scale(0.95);
+            transition: all 0.5s ease;
+        }
+
+        .rank {
+            min-width: 26px;
+            height: 26px;
+            background: rgba(212, 168, 67, 0.15);
+            border: 1px solid rgba(212, 168, 67, 0.3);
             border-radius: 6px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 14px;
-            font-weight: 800;
-            color: var(--green-deep);
-            flex-shrink: 0;
-            box-shadow: 0 2px 8px rgba(212, 168, 67, 0.25);
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--gold);
         }
 
         .city-name {
             flex: 1;
-            font-size: 15px;
-            font-weight: 600;
-            color: var(--text-primary);
+            font-size: 17px;
+            font-weight: 700;
+            color: #ffffff;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
         }
 
         .imsak-val {
-            font-size: 20px;
-            font-weight: 700;
+            font-size: 18px;
+            font-weight: 800;
             color: var(--gold-light);
-            text-shadow: 0 0 12px var(--gold-glow);
-            flex-shrink: 0;
+            font-variant-numeric: tabular-nums;
             min-width: 55px;
             text-align: right;
-            font-variant-numeric: tabular-nums;
         }
 
-        .imsak-val.loading {
-            font-size: 12px;
-            color: var(--text-secondary);
-            animation: pulse 1.5s ease-in-out infinite;
+        .imsak-val.passed {
+            color: var(--green-light);
+            text-decoration: line-through;
+            opacity: 0.5;
         }
 
-        @keyframes pulse {
-
-            0%,
-            100% {
-                opacity: 0.4;
-            }
-
-            50% {
-                opacity: 1;
-            }
-        }
-
-        /* ── Footer / page indicator ── */
+        /* ── Footer ── */
         .footer {
             display: flex;
-            align-items: center;
             justify-content: center;
-            gap: 8px;
-            margin-top: 12px;
+            align-items: center;
+            gap: 6px;
+            padding: 10px 0 2px;
             position: relative;
             z-index: 1;
         }
 
         .dot {
-            width: 7px;
-            height: 7px;
+            width: 6px;
+            height: 6px;
             border-radius: 50%;
-            background: rgba(212, 168, 67, 0.18);
-            border: 1px solid rgba(212, 168, 67, 0.25);
-            transition: all 0.4s ease;
+            background: rgba(212, 168, 67, 0.2);
+            transition: all 0.3s ease;
         }
 
         .dot.active {
             background: var(--gold);
-            box-shadow: 0 0 10px var(--gold-glow);
-            transform: scale(1.4);
+            width: 18px;
+            border-radius: 3px;
         }
 
         .page-label {
-            font-size: 11px;
-            color: var(--text-secondary);
-            letter-spacing: 1.5px;
-            margin-left: 10px;
+            font-size: 10px;
+            color: var(--text-dim);
+            margin-left: 8px;
+            font-variant-numeric: tabular-nums;
         }
 
-        /* ── Decorative stars (inside widget) ── */
-        .sparkle {
-            position: absolute;
-            width: 2px;
-            height: 2px;
-            background: var(--gold-light);
-            border-radius: 50%;
-            animation: twinkle 3s ease-in-out infinite;
-            z-index: 0;
-        }
-
-        .sparkle:nth-child(1) {
-            top: 12px;
-            right: 40px;
-            animation-delay: 0s;
-        }
-
-        .sparkle:nth-child(2) {
-            top: 8px;
-            right: 80px;
-            animation-delay: 0.7s;
-            width: 3px;
-            height: 3px;
-        }
-
-        .sparkle:nth-child(3) {
-            top: 18px;
-            right: 60px;
-            animation-delay: 1.4s;
-        }
-
-        .sparkle:nth-child(4) {
-            top: 6px;
-            left: 50px;
-            animation-delay: 2.1s;
-            width: 2px;
-            height: 2px;
-        }
-
-        .sparkle:nth-child(5) {
-            bottom: 20px;
-            left: 30px;
-            animation-delay: 0.5s;
-        }
-
-        .sparkle:nth-child(6) {
-            bottom: 14px;
-            right: 50px;
-            animation-delay: 1.8s;
-            width: 3px;
-            height: 3px;
-        }
-
-        @keyframes twinkle {
-
-            0%,
-            100% {
-                opacity: 0.2;
-                transform: scale(1);
-            }
-
-            50% {
-                opacity: 1;
-                transform: scale(1.8);
-            }
-        }
-
-        /* ── Crescent decoration ── */
-        .crescent {
-            position: absolute;
-            top: 14px;
-            right: 22px;
-            width: 22px;
-            height: 22px;
-            border-radius: 50%;
-            box-shadow: -5px -2px 0 0 var(--gold);
-            opacity: 0.5;
-            z-index: 1;
-            animation: moonPulse 4s ease-in-out infinite;
-        }
-
-        @keyframes moonPulse {
-
-            0%,
-            100% {
-                opacity: 0.4;
-            }
-
-            50% {
-                opacity: 0.7;
-            }
+        .remaining-label {
+            font-size: 10px;
+            color: var(--gold);
+            margin-left: auto;
         }
     </style>
 </head>
 
 <body>
-
     <div class="widget">
-        <!-- Decorative sparkles -->
-        <div class="sparkle"></div>
-        <div class="sparkle"></div>
-        <div class="sparkle"></div>
-        <div class="sparkle"></div>
-        <div class="sparkle"></div>
-        <div class="sparkle"></div>
-        <div class="crescent"></div>
+        <div class="geo-pattern"></div>
 
-        <!-- Header -->
         <div class="header">
-            <div class="header-ornament">
-                <div class="ornament-line"></div>
-                <div class="ornament-icon">☪</div>
-                <div class="ornament-line"></div>
-            </div>
-            <div class="title">İMSAK VAKİTLERİ</div>
-        </div>
-
-        <!-- Clock -->
-        <div class="clock-row">
+            <div class="crescent">☪</div>
+            <div class="vakit-label" id="vakitLabel">İMSAK</div>
             <div class="clock">
-                <span id="h">00</span><span class="sep">:</span><span id="m">00</span><span class="sep">:</span><span
-                    id="s">00</span>
+                <span class="clock-digit" id="h">00</span>
+                <span class="clock-sep">:</span>
+                <span class="clock-digit" id="m">00</span>
+                <span class="clock-sep">:</span>
+                <span class="clock-digit" id="s">00</span>
             </div>
             <div class="date-text" id="dateText"></div>
         </div>
 
-        <div class="divider"></div>
-
-        <!-- City pages -->
-        <div class="page-wrapper" id="pageWrapper">
-            <!-- Generated by JS -->
+        <div class="countdown-bar">
+            <div class="label" id="cdLabel">Sonraki ezan:</div>
+            <div class="time" id="cdTime">--:--:--</div>
         </div>
 
-        <!-- Page dots -->
+        <div class="city-list">
+            <div class="page-wrapper" id="pageWrapper"></div>
+        </div>
+
         <div class="footer" id="footer"></div>
     </div>
 
     <script>
         // ═══════════════════════════════════════
+        // ═══════════════════════════════════════
         //  CONFIG
         // ═══════════════════════════════════════
-        const API_KEY = '7ubDQjPHFIaqRVWiZFbixM:7jh7mKbZ5muvzXhXeQ2Aw9';
         const PER_PAGE = 9;
-        const INTERVAL = 10000; // 10s
-        const API_URL = 'https://api.collectapi.com/pray/single';
+        const PAGE_INTERVAL = 8000;
+        const FLASH_DURATION = 3000;
+
+        const VAKIT_KEYS = ['imsak', 'ogle', 'ikindi', 'aksam', 'yatsi'];
+        const VAKIT_LABELS = {
+            imsak: 'İMSAK',
+            ogle: 'ÖĞLE',
+            ikindi: 'İKİNDİ',
+            aksam: 'AKŞAM (İFTAR)',
+            yatsi: 'YATSI'
+        };
 
         // ═══════════════════════════════════════
-        //  81 İL (plaka sırasıyla)
+        //  STATE
         // ═══════════════════════════════════════
-        const CITIES = [
-            { p: '01', n: 'Adana', q: 'adana' },
-            { p: '02', n: 'Adıyaman', q: 'adıyaman' },
-            { p: '03', n: 'Afyonkarahisar', q: 'afyonkarahisar' },
-            { p: '04', n: 'Ağrı', q: 'ağrı' },
-            { p: '05', n: 'Amasya', q: 'amasya' },
-            { p: '06', n: 'Ankara', q: 'ankara' },
-            { p: '07', n: 'Antalya', q: 'antalya' },
-            { p: '08', n: 'Artvin', q: 'artvin' },
-            { p: '09', n: 'Aydın', q: 'aydın' },
-            { p: '10', n: 'Balıkesir', q: 'balıkesir' },
-            { p: '11', n: 'Bilecik', q: 'bilecik' },
-            { p: '12', n: 'Bingöl', q: 'bingöl' },
-            { p: '13', n: 'Bitlis', q: 'bitlis' },
-            { p: '14', n: 'Bolu', q: 'bolu' },
-            { p: '15', n: 'Burdur', q: 'burdur' },
-            { p: '16', n: 'Bursa', q: 'bursa' },
-            { p: '17', n: 'Çanakkale', q: 'çanakkale' },
-            { p: '18', n: 'Çankırı', q: 'çankırı' },
-            { p: '19', n: 'Çorum', q: 'çorum' },
-            { p: '20', n: 'Denizli', q: 'denizli' },
-            { p: '21', n: 'Diyarbakır', q: 'diyarbakır' },
-            { p: '22', n: 'Edirne', q: 'edirne' },
-            { p: '23', n: 'Elazığ', q: 'elazığ' },
-            { p: '24', n: 'Erzincan', q: 'erzincan' },
-            { p: '25', n: 'Erzurum', q: 'erzurum' },
-            { p: '26', n: 'Eskişehir', q: 'eskişehir' },
-            { p: '27', n: 'Gaziantep', q: 'gaziantep' },
-            { p: '28', n: 'Giresun', q: 'giresun' },
-            { p: '29', n: 'Gümüşhane', q: 'gümüşhane' },
-            { p: '30', n: 'Hakkari', q: 'hakkari' },
-            { p: '31', n: 'Hatay', q: 'hatay' },
-            { p: '32', n: 'Isparta', q: 'isparta' },
-            { p: '33', n: 'Mersin', q: 'mersin' },
-            { p: '34', n: 'İstanbul', q: 'istanbul' },
-            { p: '35', n: 'İzmir', q: 'izmir' },
-            { p: '36', n: 'Kars', q: 'kars' },
-            { p: '37', n: 'Kastamonu', q: 'kastamonu' },
-            { p: '38', n: 'Kayseri', q: 'kayseri' },
-            { p: '39', n: 'Kırklareli', q: 'kırklareli' },
-            { p: '40', n: 'Kırşehir', q: 'kırşehir' },
-            { p: '41', n: 'Kocaeli', q: 'kocaeli' },
-            { p: '42', n: 'Konya', q: 'konya' },
-            { p: '43', n: 'Kütahya', q: 'kütahya' },
-            { p: '44', n: 'Malatya', q: 'malatya' },
-            { p: '45', n: 'Manisa', q: 'manisa' },
-            { p: '46', n: 'K.Maraş', q: 'kahramanmaraş' },
-            { p: '47', n: 'Mardin', q: 'mardin' },
-            { p: '48', n: 'Muğla', q: 'muğla' },
-            { p: '49', n: 'Muş', q: 'muş' },
-            { p: '50', n: 'Nevşehir', q: 'nevşehir' },
-            { p: '51', n: 'Niğde', q: 'niğde' },
-            { p: '52', n: 'Ordu', q: 'ordu' },
-            { p: '53', n: 'Rize', q: 'rize' },
-            { p: '54', n: 'Sakarya', q: 'sakarya' },
-            { p: '55', n: 'Samsun', q: 'samsun' },
-            { p: '56', n: 'Siirt', q: 'siirt' },
-            { p: '57', n: 'Sinop', q: 'sinop' },
-            { p: '58', n: 'Sivas', q: 'sivas' },
-            { p: '59', n: 'Tekirdağ', q: 'tekirdağ' },
-            { p: '60', n: 'Tokat', q: 'tokat' },
-            { p: '61', n: 'Trabzon', q: 'trabzon' },
-            { p: '62', n: 'Tunceli', q: 'tunceli' },
-            { p: '63', n: 'Şanlıurfa', q: 'şanlıurfa' },
-            { p: '64', n: 'Uşak', q: 'uşak' },
-            { p: '65', n: 'Van', q: 'van' },
-            { p: '66', n: 'Yozgat', q: 'yozgat' },
-            { p: '67', n: 'Zonguldak', q: 'zonguldak' },
-            { p: '68', n: 'Aksaray', q: 'aksaray' },
-            { p: '69', n: 'Bayburt', q: 'bayburt' },
-            { p: '70', n: 'Karaman', q: 'karaman' },
-            { p: '71', n: 'Kırıkkale', q: 'kırıkkale' },
-            { p: '72', n: 'Batman', q: 'batman' },
-            { p: '73', n: 'Şırnak', q: 'şırnak' },
-            { p: '74', n: 'Bartın', q: 'bartın' },
-            { p: '75', n: 'Ardahan', q: 'ardahan' },
-            { p: '76', n: 'Iğdır', q: 'iğdır' },
-            { p: '77', n: 'Yalova', q: 'yalova' },
-            { p: '78', n: 'Karabük', q: 'karabük' },
-            { p: '79', n: 'Kilis', q: 'kilis' },
-            { p: '80', n: 'Osmaniye', q: 'osmaniye' },
-            { p: '81', n: 'Düzce', q: 'düzce' }
-        ];
-
-        // ═══════════════════════════════════════
-        //  STATE + LOCALSTORAGE CACHE
-        // ═══════════════════════════════════════
+        let DATA = [];
+        let currentVakit = null;
+        let activeDate = null;     // hangi günün verisini gösteriyoruz
+        let sortedCities = [];
+        let calledSet = new Set();
         let curPage = 0;
-        const totalPages = Math.ceil(CITIES.length / PER_PAGE);
-        let firstLog = true;
+        let totalPages = 0;
+        let switchPending = false;
 
-        // Bugünün tarihi (YYYY-MM-DD) — günde 1 kez çekmek yeterli
-        var TODAY = new Date().toISOString().slice(0, 10);
-        var STORAGE_KEY = 'imsak_cache_' + TODAY;
-
-        // localStorage'dan yükle veya boş obje
-        function loadCache() {
-            try {
-                var raw = localStorage.getItem(STORAGE_KEY);
-                if (raw) return JSON.parse(raw);
-            } catch (e) { }
-            return {};
-        }
-        function saveCache(cache) {
-            try {
-                localStorage.setItem(STORAGE_KEY, JSON.stringify(cache));
-                // Eski günlerin verisini temizle
-                for (var i = 0; i < localStorage.length; i++) {
-                    var key = localStorage.key(i);
-                    if (key && key.startsWith('imsak_cache_') && key !== STORAGE_KEY) {
-                        localStorage.removeItem(key);
-                    }
-                }
-            } catch (e) { }
+        // ═══════════════════════════════════════
+        //  HELPERS
+        // ═══════════════════════════════════════
+        function getDateKey(date) {
+            var dd = String(date.getDate()).padStart(2, '0');
+            var mm = String(date.getMonth() + 1).padStart(2, '0');
+            var yyyy = date.getFullYear();
+            return dd + '-' + mm + '-' + yyyy;
         }
 
-        var cache = loadCache();
+        function parseTimeForDate(str, date) {
+            // "05:56 (+03)" → Date objesi (belirtilen günde saat:dakika)
+            if (!str) return null;
+            var m = str.match(/^(\d{2}):(\d{2})/);
+            if (!m) return null;
+            var d = new Date(date);
+            d.setHours(parseInt(m[1]), parseInt(m[2]), 0, 0);
+            return d;
+        }
+
+        function findDay(cityData, dateKey) {
+            for (var i = 0; i < cityData.gunler.length; i++) {
+                if (cityData.gunler[i].tarih === dateKey) return cityData.gunler[i];
+            }
+            return null;
+        }
+
+        function countdownStr(ms) {
+            if (ms <= 0) return '00:00:00';
+            var s = Math.floor(ms / 1000);
+            var h = Math.floor(s / 3600);
+            s %= 3600;
+            var m = Math.floor(s / 60);
+            s %= 60;
+            return String(h).padStart(2, '0') + ':' + String(m).padStart(2, '0') + ':' + String(s).padStart(2, '0');
+        }
+
+        function tomorrow() {
+            var d = new Date();
+            d.setDate(d.getDate() + 1);
+            d.setHours(0, 0, 0, 0);
+            return d;
+        }
 
         // ═══════════════════════════════════════
         //  CLOCK
         // ═══════════════════════════════════════
         function tick() {
-            const now = new Date();
+            var now = new Date();
             document.getElementById('h').textContent = String(now.getHours()).padStart(2, '0');
             document.getElementById('m').textContent = String(now.getMinutes()).padStart(2, '0');
             document.getElementById('s').textContent = String(now.getSeconds()).padStart(2, '0');
             document.getElementById('dateText').textContent =
                 now.toLocaleDateString('tr-TR', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
-        }
-        setInterval(tick, 1000);
-        tick();
 
-        // ═══════════════════════════════════════
-        //  BUILD PAGES
-        // ═══════════════════════════════════════
-        function build() {
-            const wrapper = document.getElementById('pageWrapper');
-            const footer = document.getElementById('footer');
-            wrapper.innerHTML = '';
-            footer.innerHTML = '';
-
-            for (let p = 0; p < totalPages; p++) {
-                const div = document.createElement('div');
-                div.className = 'page-content' + (p === 0 ? ' active' : '');
-                div.id = `pg${p}`;
-
-                const slice = CITIES.slice(p * PER_PAGE, p * PER_PAGE + PER_PAGE);
-                slice.forEach(c => {
-                    const row = document.createElement('div');
-                    row.className = 'city-row';
-                    // Eğer cache'de varsa direkt göster
-                    var val = cache[c.q] || '···';
-                    var cls = cache[c.q] ? 'imsak-val' : 'imsak-val loading';
-                    row.innerHTML = `
-                    <div class="plate">${c.p}</div>
-                    <div class="city-name">${c.n}</div>
-                    <div class="${cls}" id="t${c.p}">${val}</div>`;
-                    div.appendChild(row);
-                });
-                wrapper.appendChild(div);
-
-                const dot = document.createElement('div');
-                dot.className = 'dot' + (p === 0 ? ' active' : '');
-                dot.id = `d${p}`;
-                footer.appendChild(dot);
-            }
-
-            const lbl = document.createElement('div');
-            lbl.className = 'page-label';
-            lbl.id = 'pgLbl';
-            lbl.textContent = `1 / ${totalPages}`;
-            footer.appendChild(lbl);
+            updateCountdown(now);
+            checkEzan(now);
         }
 
         // ═══════════════════════════════════════
-        //  API — sıralı istek (rate limit: 1/sn)
+        //  DETERMINE CURRENT VAKIT
         // ═══════════════════════════════════════
-        function fetchCity(city) {
-            return new Promise(function (resolve) {
-                if (cache[city.q]) {
-                    setTime(city.p, cache[city.q]);
-                    resolve();
-                    return;
+        function determineVakit() {
+            var now = new Date();
+            var todayKey = getDateKey(now);
+
+            // Her vakit için tüm şehirlerin o vakti geçip geçmediğine bak
+            for (var vi = 0; vi < VAKIT_KEYS.length; vi++) {
+                var vk = VAKIT_KEYS[vi];
+                var hasAny = false;
+                var allPassed = true;
+
+                for (var ci = 0; ci < DATA.length; ci++) {
+                    var gun = findDay(DATA[ci], todayKey);
+                    if (!gun || !gun[vk]) continue;
+                    hasAny = true;
+                    var t = parseTimeForDate(gun[vk], now);
+                    if (t && t > now) {
+                        allPassed = false;
+                        break;
+                    }
                 }
 
-                var xhr = new XMLHttpRequest();
+                if (hasAny && !allPassed) {
+                    activeDate = new Date(now);
+                    activeDate.setHours(0, 0, 0, 0);
+                    return vk;
+                }
+            }
 
-                xhr.addEventListener('readystatechange', function () {
-                    if (this.readyState === this.DONE) {
-                        try {
-                            var raw = this.responseText;
-                            if (firstLog) {
-                                console.log('[İmsak API] İlk yanıt (' + city.n + '):', raw);
-                                firstLog = false;
-                            }
+            // Tüm vakitler geçmiş → yarının imsakını göster
+            activeDate = tomorrow();
+            return 'imsak';
+        }
 
-                            var d = JSON.parse(raw);
-                            if (d.success && d.ezan && d.ezan.time) {
-                                cache[city.q] = d.ezan.time;
-                                saveCache(cache); // her başarılı çekimde kaydet
-                                setTime(city.p, d.ezan.time);
-                            } else {
-                                console.warn('[İmsak API] Beklenmeyen yanıt (' + city.n + '):', raw);
-                                setTime(city.p, '—');
-                            }
-                        } catch (e) {
-                            console.warn('[İmsak API] Hata (' + city.n + '):', this.status, this.responseText);
-                            setTime(city.p, '—');
-                        }
-                        resolve();
-                    }
+        // ═══════════════════════════════════════
+        //  SORT CITIES FOR CURRENT VAKIT
+        // ═══════════════════════════════════════
+        function sortCitiesForVakit(vk) {
+            var dateKey = getDateKey(activeDate);
+            var list = [];
+
+            for (var i = 0; i < DATA.length; i++) {
+                var gun = findDay(DATA[i], dateKey);
+                if (!gun || !gun[vk]) continue;
+                var t = parseTimeForDate(gun[vk], activeDate);
+                if (!t) continue;
+                list.push({
+                    sehir: DATA[i].sehir,
+                    saat: gun[vk].replace(/ \(\+03\)/, ''),
+                    time: t,
+                    idx: i
                 });
+            }
 
-                var url = API_URL + '?ezan=' + encodeURIComponent('İmsak') + '&city=' + encodeURIComponent(city.q);
-                xhr.open('GET', url);
-                xhr.setRequestHeader('authorization', 'apikey ' + API_KEY);
-                xhr.send(null);
+            list.sort(function (a, b) { return a.time - b.time; });
+            return list;
+        }
+
+        // ═══════════════════════════════════════
+        //  CHECK EZAN
+        // ═══════════════════════════════════════
+        function checkEzan(now) {
+            if (!sortedCities.length) return;
+
+            var changed = false;
+            for (var i = 0; i < sortedCities.length; i++) {
+                var c = sortedCities[i];
+                if (calledSet.has(c.sehir)) continue;
+                if (now >= c.time) {
+                    calledSet.add(c.sehir);
+                    changed = true;
+                    flashCity(c.sehir);
+                }
+            }
+
+            // Tüm şehirler okunduysa sonraki vakte geç
+            var remaining = sortedCities.length - calledSet.size;
+            if (remaining <= 0 && sortedCities.length > 0 && !switchPending) {
+                switchPending = true;
+                setTimeout(function () {
+                    switchPending = false;
+                    switchToNextVakit();
+                }, FLASH_DURATION + 1500);
+            }
+
+            if (changed) {
+                rebuildPages();
+            }
+        }
+
+        function flashCity(sehirName) {
+            var els = document.querySelectorAll('[data-sehir="' + sehirName + '"]');
+            els.forEach(function (el) {
+                el.classList.add('called');
+                setTimeout(function () {
+                    el.classList.add('fade-out');
+                }, FLASH_DURATION);
             });
         }
 
-        function setTime(plate, val) {
-            var el = document.getElementById('t' + plate);
-            if (el) { el.textContent = val; el.classList.remove('loading'); }
+        function switchToNextVakit() {
+            var idx = VAKIT_KEYS.indexOf(currentVakit);
+            if (idx < VAKIT_KEYS.length - 1) {
+                currentVakit = VAKIT_KEYS[idx + 1];
+                // Aynı gün, activeDate değişmez
+            } else {
+                // Yatsı bitti → yarının imsakına geç
+                currentVakit = 'imsak';
+                activeDate = tomorrow();
+            }
+
+            calledSet.clear();
+            sortedCities = sortCitiesForVakit(currentVakit);
+            document.getElementById('vakitLabel').textContent = VAKIT_LABELS[currentVakit] || currentVakit.toUpperCase();
+            curPage = 0;
+            rebuildPages();
+
+            console.log('[Ezan] Vakit değişti → ' + currentVakit + ' (' + getDateKey(activeDate) + ') — ' + sortedCities.length + ' şehir');
         }
 
-        // Sadece cache'de olmayan şehirleri sırayla çek
-        function fetchMissingCities() {
-            var missing = CITIES.filter(function (c) { return !cache[c.q]; });
-            if (missing.length === 0) {
-                console.log('[İmsak] Tüm veriler localStorage cache\'den yüklendi ✓ (0 API çağrısı)');
-                return;
-            }
-            console.log('[İmsak] ' + missing.length + ' şehir API\'den çekilecek, ' + (CITIES.length - missing.length) + ' şehir cache\'den yüklendi');
-            var i = 0;
-            function next() {
-                if (i >= missing.length) {
-                    console.log('[İmsak API] Tüm şehirler yüklendi ✓');
-                    return;
+        // ═══════════════════════════════════════
+        //  COUNTDOWN
+        // ═══════════════════════════════════════
+        function updateCountdown(now) {
+            var nextTime = null;
+            var nextCity = null;
+            for (var i = 0; i < sortedCities.length; i++) {
+                if (!calledSet.has(sortedCities[i].sehir) && sortedCities[i].time > now) {
+                    nextTime = sortedCities[i].time;
+                    nextCity = sortedCities[i].sehir;
+                    break;
                 }
-                fetchCity(missing[i]).then(function () {
-                    i++;
-                    setTimeout(next, 1200);
-                });
             }
-            next();
+
+            var cdEl = document.getElementById('cdTime');
+            var cdLbl = document.getElementById('cdLabel');
+            if (nextTime) {
+                var diff = nextTime - now;
+                cdEl.textContent = countdownStr(diff);
+                cdLbl.textContent = 'Sıradaki: ' + nextCity;
+            } else if (sortedCities.length > 0 && calledSet.size < sortedCities.length) {
+                // Henüz vakit gelmemiş, ilk sıradakine geri say
+                var first = sortedCities[0];
+                var diff = first.time - now;
+                cdEl.textContent = countdownStr(diff);
+                cdLbl.textContent = 'İlk ezan: ' + first.sehir;
+            } else {
+                cdEl.textContent = '--:--:--';
+                cdLbl.textContent = 'Vakit geçişi bekleniyor...';
+            }
         }
 
         // ═══════════════════════════════════════
-        //  PAGE CYCLING
+        //  BUILD / REBUILD PAGES
         // ═══════════════════════════════════════
+        function rebuildPages() {
+            var visible = sortedCities.filter(function (c) {
+                return !calledSet.has(c.sehir);
+            });
+
+            var displayList = visible;
+
+            totalPages = Math.max(1, Math.ceil(displayList.length / PER_PAGE));
+            if (curPage >= totalPages) curPage = 0;
+
+            var wrapper = document.getElementById('pageWrapper');
+            var footer = document.getElementById('footer');
+            wrapper.innerHTML = '';
+            footer.innerHTML = '';
+
+            for (var p = 0; p < totalPages; p++) {
+                var div = document.createElement('div');
+                div.className = 'page-content' + (p === curPage ? ' active' : '');
+                div.id = 'pg' + p;
+
+                var slice = displayList.slice(p * PER_PAGE, p * PER_PAGE + PER_PAGE);
+                for (var si = 0; si < slice.length; si++) {
+                    var c = slice[si];
+                    var row = document.createElement('div');
+                    row.className = 'city-row';
+                    row.setAttribute('data-sehir', c.sehir);
+
+                    var globalIdx = sortedCities.indexOf(c) + 1;
+
+                    row.innerHTML =
+                        '<div class="rank">' + globalIdx + '</div>' +
+                        '<div class="city-name">' + c.sehir + '</div>' +
+                        '<div class="imsak-val">' + c.saat + '</div>';
+
+                    div.appendChild(row);
+                }
+                wrapper.appendChild(div);
+
+                var dot = document.createElement('div');
+                dot.className = 'dot' + (p === curPage ? ' active' : '');
+                dot.id = 'd' + p;
+                footer.appendChild(dot);
+            }
+
+            var lbl = document.createElement('div');
+            lbl.className = 'page-label';
+            lbl.id = 'pgLbl';
+            lbl.textContent = (curPage + 1) + ' / ' + totalPages;
+            footer.appendChild(lbl);
+
+            var rem = document.createElement('div');
+            rem.className = 'remaining-label';
+            rem.textContent = visible.length + ' şehir kaldı';
+            footer.appendChild(rem);
+        }
+
         function showPage(idx) {
             var prev = document.querySelector('.page-content.active');
             var prevDot = document.querySelector('.dot.active');
-            if (prev) { prev.classList.remove('active'); prev.classList.add('exit-left'); }
+            if (prev) prev.classList.remove('active');
             if (prevDot) prevDot.classList.remove('active');
 
-            setTimeout(function () {
-                if (prev) prev.classList.remove('exit-left');
-                var next = document.getElementById('pg' + idx);
-                var nDot = document.getElementById('d' + idx);
-                if (next) next.classList.add('active');
-                if (nDot) nDot.classList.add('active');
-                document.getElementById('pgLbl').textContent = (idx + 1) + ' / ' + totalPages;
-                curPage = idx;
-            }, 500);
+            var next = document.getElementById('pg' + idx);
+            var nDot = document.getElementById('d' + idx);
+            if (next) next.classList.add('active');
+            if (nDot) nDot.classList.add('active');
+
+            var pgLbl = document.getElementById('pgLbl');
+            if (pgLbl) pgLbl.textContent = (idx + 1) + ' / ' + totalPages;
+            curPage = idx;
         }
 
         function advance() {
+            if (totalPages <= 1) return;
             showPage((curPage + 1) % totalPages);
         }
 
         // ═══════════════════════════════════════
         //  INIT
         // ═══════════════════════════════════════
-        build();
-        fetchMissingCities(); // sadece eksik şehirleri çek
-        setInterval(advance, INTERVAL);
+        function init() {
+            fetch('ramazan_imsakiye_2026.json')
+                .then(function (r) { return r.json(); })
+                .then(function (json) {
+                    DATA = json;
+                    console.log('[Ezan] JSON yüklendi, ' + DATA.length + ' şehir');
+
+                    currentVakit = determineVakit();
+                    sortedCities = sortCitiesForVakit(currentVakit);
+                    document.getElementById('vakitLabel').textContent = VAKIT_LABELS[currentVakit];
+
+                    console.log('[Ezan] Aktif vakit: ' + currentVakit + ' (' + getDateKey(activeDate) + ') — ' + sortedCities.length + ' şehir');
+
+                    // Geçmiş vakitleri işaretle (sadece bugün ve şu andan önce olanlar)
+                    var now = new Date();
+                    for (var i = 0; i < sortedCities.length; i++) {
+                        if (sortedCities[i].time <= now) {
+                            calledSet.add(sortedCities[i].sehir);
+                        }
+                    }
+
+                    rebuildPages();
+                    setInterval(advance, PAGE_INTERVAL);
+                    setInterval(tick, 1000);
+                    tick();
+                })
+                .catch(function (e) {
+                    console.error('[Ezan] JSON yüklenemedi:', e);
+                });
+        }
+
+        init();
     </script>
 </body>
 
