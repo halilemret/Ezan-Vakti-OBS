@@ -593,12 +593,38 @@
         ];
 
         // ═══════════════════════════════════════
-        //  STATE
+        //  STATE + LOCALSTORAGE CACHE
         // ═══════════════════════════════════════
         let curPage = 0;
         const totalPages = Math.ceil(CITIES.length / PER_PAGE);
-        const cache = {};
-        let firstLog = true; // ilk yanıtı konsola yazdır (debug)
+        let firstLog = true;
+
+        // Bugünün tarihi (YYYY-MM-DD) — günde 1 kez çekmek yeterli
+        var TODAY = new Date().toISOString().slice(0, 10);
+        var STORAGE_KEY = 'imsak_cache_' + TODAY;
+
+        // localStorage'dan yükle veya boş obje
+        function loadCache() {
+            try {
+                var raw = localStorage.getItem(STORAGE_KEY);
+                if (raw) return JSON.parse(raw);
+            } catch (e) { }
+            return {};
+        }
+        function saveCache(cache) {
+            try {
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(cache));
+                // Eski günlerin verisini temizle
+                for (var i = 0; i < localStorage.length; i++) {
+                    var key = localStorage.key(i);
+                    if (key && key.startsWith('imsak_cache_') && key !== STORAGE_KEY) {
+                        localStorage.removeItem(key);
+                    }
+                }
+            } catch (e) { }
+        }
+
+        var cache = loadCache();
 
         // ═══════════════════════════════════════
         //  CLOCK
@@ -632,10 +658,13 @@
                 slice.forEach(c => {
                     const row = document.createElement('div');
                     row.className = 'city-row';
+                    // Eğer cache'de varsa direkt göster
+                    var val = cache[c.q] || '···';
+                    var cls = cache[c.q] ? 'imsak-val' : 'imsak-val loading';
                     row.innerHTML = `
                     <div class="plate">${c.p}</div>
                     <div class="city-name">${c.n}</div>
-                    <div class="imsak-val loading" id="t${c.p}">···</div>`;
+                    <div class="${cls}" id="t${c.p}">${val}</div>`;
                     div.appendChild(row);
                 });
                 wrapper.appendChild(div);
@@ -676,9 +705,9 @@
                             }
 
                             var d = JSON.parse(raw);
-                            // API yanıt yapısı: { success: true, ezan: { time: "06:19", ... } }
                             if (d.success && d.ezan && d.ezan.time) {
                                 cache[city.q] = d.ezan.time;
+                                saveCache(cache); // her başarılı çekimde kaydet
                                 setTime(city.p, d.ezan.time);
                             } else {
                                 console.warn('[İmsak API] Beklenmeyen yanıt (' + city.n + '):', raw);
@@ -704,17 +733,23 @@
             if (el) { el.textContent = val; el.classList.remove('loading'); }
         }
 
-        // Tüm şehirleri sırayla çek (1.2 saniye arayla, rate limit aşılmasın)
-        function fetchAllCities() {
+        // Sadece cache'de olmayan şehirleri sırayla çek
+        function fetchMissingCities() {
+            var missing = CITIES.filter(function (c) { return !cache[c.q]; });
+            if (missing.length === 0) {
+                console.log('[İmsak] Tüm veriler localStorage cache\'den yüklendi ✓ (0 API çağrısı)');
+                return;
+            }
+            console.log('[İmsak] ' + missing.length + ' şehir API\'den çekilecek, ' + (CITIES.length - missing.length) + ' şehir cache\'den yüklendi');
             var i = 0;
             function next() {
-                if (i >= CITIES.length) {
+                if (i >= missing.length) {
                     console.log('[İmsak API] Tüm şehirler yüklendi ✓');
                     return;
                 }
-                fetchCity(CITIES[i]).then(function () {
+                fetchCity(missing[i]).then(function () {
                     i++;
-                    setTimeout(next, 1200); // 1.2 saniye bekle
+                    setTimeout(next, 1200);
                 });
             }
             next();
@@ -748,7 +783,7 @@
         //  INIT
         // ═══════════════════════════════════════
         build();
-        fetchAllCities();   // tüm 81 şehri arka planda sırayla çek
+        fetchMissingCities(); // sadece eksik şehirleri çek
         setInterval(advance, INTERVAL);
     </script>
 </body>
